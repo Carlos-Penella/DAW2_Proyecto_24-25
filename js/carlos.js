@@ -28,8 +28,21 @@ function draw() {
 }
 
 function suelo() {
-    ctx.fillStyle = 'green';
+    ctx.fillStyle = "#8ec416";
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 3 / 40 * unit;
     ctx.beginPath();
-    ctx.fillRect(0, h-unit*10, unit*70, unit*70);
+    ctx.moveTo(posX + 0, h - unit * 5);
+    for (posX = 0; posX < posFINAL + unit * 15; posX += 20 * unit) {
+        ctx.quadraticCurveTo(posX + unit * 4, unit * 13, posX + unit * 10, h - unit * 5);
+        ctx.quadraticCurveTo(posX + unit * 16, unit * 17, posX + unit * 20, h - unit * 5);
+    }
+    ctx.lineTo(posX + unit * 20, h);
+    ctx.lineTo(0, h);
+    ctx.lineTo(0, h - unit * 5);
+
+    ctx.fill();
+    ctx.stroke();
     ctx.closePath();
+}
 }
