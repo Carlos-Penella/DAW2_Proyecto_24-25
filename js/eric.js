@@ -2,8 +2,8 @@ function techo() {
 
      gris = '#909090';
      rojo = '#aa0000';
-     marron = '#7b4b1e'; 
-     amarillo ='#d1bc00'
+     marron = '#7b4b1e';
+     amarillo = '#d1bc00'
 
      ctx.strokeStyle = black;
      ctx.lineWidth = 3;
@@ -17,8 +17,6 @@ function techo() {
      ctx.stroke();
      ctx.closePath();
 
-
-
      //bandera
 
      ctx.beginPath();
@@ -31,10 +29,10 @@ function techo() {
      ctx.lineTo(unit * 4, unit * 1);
      ctx.stroke();
      ctx.fill();
-     ctx.closePath();    
+     ctx.closePath();
 
      //cuerpo
-   
+
      ctx.strokeStyle = gris;
      ctx.fillStyle = gris;
      ctx.beginPath();
@@ -42,17 +40,15 @@ function techo() {
      ctx.lineTo(unit * 0, unit * 10);
      ctx.lineTo(unit * 0, unit * 18);
      ctx.lineTo(unit * 8, unit * 18);
-     ctx.lineTo(unit * 8, unit * 10); 
+     ctx.lineTo(unit * 8, unit * 10);
      ctx.fill();
      ctx.stroke();
-     ctx.closePath();   
-    
+     ctx.closePath();
 
      // ladrillos
 
-     ctx.strokeStyle = 'black';     
-     ctx.lineWidth = 1.6;
-     
+     ctx.strokeStyle = 'black';
+     ctx.lineWidth = 1.7;
 
      fila = 0  // Contador para las filas
      for (y = unit * 10; y <= unit * 17; y += unit) {
@@ -70,12 +66,10 @@ function techo() {
                ctx.beginPath();
                ctx.moveTo(x + desplazamiento, y - unit / 3);
                ctx.lineTo(x + desplazamiento, y + 2 * unit / 3);
-               ctx.stroke();            
-               
-               
+               ctx.stroke();
           }
           fila++
-     }      
+     }
 
      //Puerta
 
@@ -92,6 +86,23 @@ function techo() {
      ctx.fill();
      ctx.closePath();
 
+     // Ventana
+     ctx.fillStyle = amarillo
+     ctx.strokeStyle = 'black'
+     ctx.lineWidth = 2
+     ctx.beginPath()
+     ctx.rect(unit * 1.5, unit * 12, unit * 2, unit * 2)
+     ctx.fill()
+     ctx.stroke()
+
+     // Ventana lineas
+     ctx.beginPath()
+     ctx.moveTo(unit * 2.5, unit * 12)
+     ctx.lineTo(unit * 2.5, unit * 14)
+     ctx.moveTo(unit * 1.5, unit * 13)
+     ctx.lineTo(unit * 3.5, unit * 13)
+     ctx.stroke()
+
      //tejado
 
      ctx.lineWidth = 3;
@@ -105,7 +116,6 @@ function techo() {
      ctx.fill();
      ctx.stroke();
      ctx.closePath();
-
 }
 
 function sol() {
