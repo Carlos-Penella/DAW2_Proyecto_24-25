@@ -1,16 +1,19 @@
+
 function tierraToda() {
+   
     suelo()
     for (let i = 0; i < 4; i++) {
-        posX = Math.floor(Math.random() * (unit * 27 - -unit * 5)) + -unit * 5;
+        posX = Math.floor(Math.random() * (unit * 27 - -unit * 5)) + -unit * 1;
         posY = Math.floor(Math.random() * (-unit * 0.2 - unit * 3)) + unit * 3;
         flor(posX, posY);
     }
+
 }
 
 function suelo() {
     ctx.fillStyle = "#036403";
     ctx.strokeStyle = 'green';
-    ctx.lineWidth = 8 / 40 * unit; // cambiar
+    ctx.lineWidth = 3 / 40 * unit;
 
     //Parte uno
     ctx.beginPath();
@@ -21,8 +24,11 @@ function suelo() {
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
+    
+
 
     // Parte dos
+
     ctx.fillStyle = "#8ec706";
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 3 / 40 * unit;
@@ -37,6 +43,8 @@ function suelo() {
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
+
+
 }
 
 function flor(posX, posY) {
@@ -83,4 +91,8 @@ function flor(posX, posY) {
     ctx.fillStyle = 'orange';
     ctx.fill();
     ctx.closePath();
+
 }
+
+
+
