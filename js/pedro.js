@@ -1,7 +1,3 @@
-let intervalo
-const intervaloMovimiento = 10
-const distanciaMovimineto = 0.1
-let yMover = 0
 const degradadoClaro = '#909090'
 const degradadoMedio = '#707070'
 const degradadoOscuro = '#505050'
@@ -12,7 +8,7 @@ const alturaTotal = 100
 const anchura = 8
 const finalTorre = 18
 const inicioTorre = 0
-const repisas = 10
+const repisas = 9
 const anchoRepisa = 4
 
 const inicio = alturaTotal + inicioTorre
@@ -20,21 +16,6 @@ const alturaTorre = alturaTotal - finalTorre
 
 const primerCambio = finalTorre + alturaTorre - alturaTorre / 3
 const segundoCambio = finalTorre + alturaTorre / 3
-
-function start() {
-    intervalo = setInterval(move, intervaloMovimiento)
-    ctx.translate(0, canvas.height - inicio * unit)
-    drawMovimiento()
-}
-
-function drawMovimiento() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height + alturaTotal * unit)
-    ctx.save()
-    ctx.translate(0, yMover)
-    torreon()
-    techo(0, 0)
-    ctx.restore()
-}
 
 function torreon() {
 
@@ -118,14 +99,5 @@ function torreon() {
         ctx.lineTo(anchura * unit, y + unit / 2)
         ctx.stroke()
         ctx.closePath()
-    }
-}
-
-function move() {
-    yMover += unit * distanciaMovimineto
-    drawMovimiento()
-    if (yMover > alturaTotal * unit - canvas.height + (finalTorre / 2 + inicioTorre) * unit) {
-        clearInterval(intervalo)
-        console.log('para')
     }
 }
