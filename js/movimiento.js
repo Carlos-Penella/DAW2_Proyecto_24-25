@@ -1,7 +1,8 @@
 let intervalo
-const intervaloMovimiento = 12
+const intervaloMovimiento = 15
 const distanciaMovimineto = 0.1
 let yMover = 0
+let yPato = 0
 count = 0
 
 puntos = 0
@@ -152,14 +153,14 @@ const preguntas = [
 function start() {
      intervalo = setInterval(move, intervaloMovimiento)
      ctx.translate(0, canvas.height - inicio * unit)
-     drawMovimiento()
+     // drawMovimiento()
 
      contador = setInterval(() => {
           count++
           if (count >= 1) {
                clearInterval(intervalo)
                clearInterval(contador)
-               resetQuestion()               
+               resetQuestion()
           }
 
      }, 1000)
@@ -169,6 +170,7 @@ function start() {
 
 function drawMovimiento() {
 
+     
      ctx.clearRect(0, 0, canvas.width, canvas.height + alturaTotal * unit)
 
      ctx.save()
@@ -179,19 +181,24 @@ function drawMovimiento() {
           techo(0, 0) // eric
      }
 
-     castillo(45, 800) // raúl
-     tierraToda()
+     castillo(unit *3, 800) // raúl
+     tierraToda() 
+     yPato += unit*0.12
+   
+     pato(-80, unit *50 - yPato) // pedro
+     
+
 
      ctx.restore()
 }
 
 // Función para actualizar el movimiento (hacia arriba o hacia abajo)
 function updateMovement(delta) {
-     yMover += unit * distanciaMovimineto * delta;
+     yMover += unit * distanciaMovimineto * delta;       
      drawMovimiento();
 
      if (yMover > alturaTotal * unit - canvas.height + (finalTorre / 2 + inicioTorre) * unit) {
-          clearInterval(intervalo);         
+          clearInterval(intervalo);
      }
 }
 
@@ -209,19 +216,25 @@ function resetQuestion() {
 
      const preguntaElegida = preguntas[Math.floor(Math.random() * preguntas.length)];
      contenedor.innerHTML = `<h1>${preguntaElegida.pregunta}</h1>
-     <button onclick="correcto()">${preguntaElegida.correcto}</button><br>
-     <button onclick="incorrecto()">${preguntaElegida.incorrecto}</button><br>
-     <button onclick="incorrecto()">${preguntaElegida.incorrecto2}</button><br>
-     <button onclick="incorrecto()">${preguntaElegida.incorrecto3}</button><br>`;
+     <button onclick="correcto()">${preguntaElegida.correcto}</button><br> <br>
+     <button onclick="incorrecto()">${preguntaElegida.incorrecto}</button><br> <br>
+     <button onclick="incorrecto()">${preguntaElegida.incorrecto2}</button><br> <br>
+     <button onclick="incorrecto()">${preguntaElegida.incorrecto3}</button><br> <br>`;
 }
 
 // Función para manejar la respuesta y reiniciar el movimiento
 function handleAnswer(moveFn) {
-    
+
      document.getElementById('preguntas').innerHTML = "";
 
-     // Inicia el movimiento con la función move o moveAbajo
-     intervalo = setInterval(moveFn, intervaloMovimiento);
+     if (puntos <= -1) {
+          clearInterval(intervalo);
+     } else {
+          // Inicia el movimiento con la función move o moveAbajo
+          intervalo = setInterval(moveFn, intervaloMovimiento);
+     }
+
+
 
      // Reinicio tras un segundo
      contador = setInterval(() => {
@@ -232,6 +245,14 @@ function handleAnswer(moveFn) {
                resetQuestion();
           }
      }, 1000);
+
+     if (puntos >= 7) {
+          clearInterval(intervalo);
+          alert('¡Has ganado!')
+          return
+     }
+
+
 }
 
 function correcto() {
