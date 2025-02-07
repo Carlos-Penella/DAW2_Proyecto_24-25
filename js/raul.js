@@ -13,7 +13,7 @@ function castillo(posX, posY) {
      ctx.beginPath();
      ctx.strokeRect(unit * 15, h - unit * 30, unit * 20, unit * 20);
      ctx.closePath();*/
-
+     ctx.lineWidth = 3;
      silueta(posX, posY);
      montañas(posX, posY);
      ventanas(posX, posY);
@@ -23,7 +23,7 @@ function castillo(posX, posY) {
 // Silueta del castillo
 function silueta(posX, posY) {
      ctx.strokeStyle = lineaCastillo;
-     ctx.lineWidth = 3;
+     ctx.lineWidth = 2;
      ctx.fillStyle = colorCastillo;
 
      parteDerecha(posX, posY);
@@ -199,7 +199,6 @@ function montañas(posX, posY) {
      // Configuración del trazo
      ctx.strokeStyle = lineaMontaña;
      ctx.fillStyle = colorMontaña;
-     ctx.lineWidth = 3;
 
      ctx.beginPath();
      ctx.moveTo(13.3 * unit + posX, 37.6 * unit + posY);

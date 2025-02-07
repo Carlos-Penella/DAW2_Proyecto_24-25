@@ -20,15 +20,8 @@ function draw() {
      unit = h * 0.02
 
      canvas.width = w
-     canvas.height = h  
-
-     techo(-1,0)
-     torreon() 
-     suelo()
-      
-     tierraToda()
-     
-     
+     canvas.height = h    
+     start()     
 }
 
 // REJILLA

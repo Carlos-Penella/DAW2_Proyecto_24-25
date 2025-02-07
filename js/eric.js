@@ -1,10 +1,10 @@
-function techo(posx, posy) {
 
+function techo(posx, posy) {
      gris = '#909090';
      rojo = '#aa0000';
      marron = '#7b4b1e';
-     amarillo = '#d1bc00'
-    
+     amarillo = '#d1bc00';
+
      ctx.lineWidth = 1.7;
 
      //poste
@@ -27,30 +27,29 @@ function techo(posx, posy) {
      ctx.bezierCurveTo(posx + unit * 6, posy + unit * 3.5, posx + unit * 6, posy + unit * 2, posx + unit * 4, posy + unit * 2.5);
      ctx.lineTo(posx + unit * 4, posy + unit * 1);
      ctx.stroke();
-     ctx.fill();         
+     ctx.fill();
      ctx.closePath();
 
      //cuerpo
 
-     ctx.strokeStyle = gris;
      ctx.fillStyle = gris;
+     ctx.lineWidth = 2;
      ctx.beginPath();
      ctx.moveTo(posx + unit * 8, posy + unit * 10);
      ctx.lineTo(posx + unit * 0, posy + unit * 10);
      ctx.lineTo(posx + unit * 0, posy + unit * 18);
      ctx.lineTo(posx + unit * 8, posy + unit * 18);
      ctx.lineTo(posx + unit * 8, posy + unit * 10);
-     ctx.fill();
-     ctx.stroke();
+     ctx.fill();     
      ctx.closePath();
 
      // ladrillos
 
      ctx.strokeStyle = 'black';
-     ctx.lineWidth = 1.7;
+     ctx.lineWidth = 2;
 
      fila = 0  // Contador para las filas
-     for (y = posy + unit * 10; y <= posy + unit * 18; y += unit) {
+     for (y = posy + unit * 10; y <= posy + unit * 19; y += unit) {
 
           //Con esto vamos alternando las trazas para simular ladrillos
           let desplazamiento = (fila % 2 == 0) ? 0 : unit
@@ -72,8 +71,8 @@ function techo(posx, posy) {
 
      //Puerta
 
-     ctx.lineWidth = 6;
-     ctx.strokeStyle = marron;
+     ctx.lineWidth = 2;
+     ctx.strokeStyle = gris;
      ctx.fillStyle = 'black';
      ctx.beginPath();
      ctx.moveTo(posx + unit * 7.5, posy + unit * 17.3);
@@ -113,4 +112,15 @@ function techo(posx, posy) {
      ctx.fill();
      ctx.stroke();
      ctx.closePath();
+
+     //tejado lineas
+
+     ctx.strokeStyle = 'black';
+     ctx.lineWidth = 1;
+     for (let i = 0; i < 8; i++) {
+          ctx.beginPath();
+          ctx.moveTo(posx + unit * (4 - i * 0.4), posy + unit * (3 + i * 0.9));
+          ctx.lineTo(posx + unit * (4 + i * 0.4), posy + unit * (3 + i * 0.9));
+          ctx.stroke();
+     }
 }

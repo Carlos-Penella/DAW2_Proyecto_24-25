@@ -8,7 +8,7 @@ const alturaTotal = 100
 const anchura = 8
 const finalTorre = 18
 const inicioTorre = 0
-const repisas = 9
+const repisas = 8
 const anchoRepisa = 4
 
 const inicio = alturaTotal + inicioTorre
