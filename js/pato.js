@@ -21,7 +21,11 @@ function draw() {
 
      canvas.width = w
      canvas.height = h    
+
+     ctx.save()
+
      start()     
+     
 }
 
 // REJILLA

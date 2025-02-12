@@ -17,7 +17,7 @@ function suelo() {
      ctx.strokeStyle = 'green';
      ctx.lineWidth = 3 / 40 * unit;
 
-     h = 1530
+     h = 1560;
      //Parte uno
      ctx.beginPath();
      ctx.moveTo(0, h);

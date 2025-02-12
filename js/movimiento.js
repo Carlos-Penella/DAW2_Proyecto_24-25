@@ -153,6 +153,7 @@ const preguntas = [
 ];
 function start() {
 
+     
      intervalo = setInterval(move, intervaloMovimiento)
      ctx.translate(0, canvas.height - inicio * unit)
      // drawMovimiento()
@@ -163,6 +164,9 @@ function start() {
           resetQuestion()
 
      }, 750)
+
+     globos(unit * 13, unit * 5) // oumar
+    
 
 }
 
@@ -179,13 +183,32 @@ function drawMovimiento() {
           techo(0, 92) // eric
      }
 
-     castillo(unit * 3, 800) // raúl
+     castillo(unit * 3, 800) // raúl     
      tierraToda()
-     yPato += unit * 0.13
 
-     pato(-80, unit * 50 - yPato) // pedro
 
-     dibujarGlobo(240 ,unit * 85 - yPato, "red", "white", 6, unit * 14, unit * 95-yPato) // oumar
+
+     dibujarGlobo(unit * 14, unit * 83 - yPato, "red", "white", 0) // oumar
+
+     const globosConfig = [
+          { x: 12.4, y: 84, color: "blue", speed: -0.1 },
+          { x: 15.5, y: 86, color: "pink", speed: 0.1 },
+          { x: 12, y: 90, color: "limegreen", speed: -0.2 },
+          { x: 14.3, y: 91, color: "purple", speed: 0.009 },
+          { x: 15.6, y: 94, color: "yellow", speed: 0.25 },
+          { x: 13.3, y: 97, color: "orange", speed: -0.1 }
+     ];
+
+     globosConfig.forEach((globo, index) => {
+          if (puntos >= index + 1) {
+               const escalon = index * 2;
+               dibujarGlobo(unit * globo.x, unit * (globo.y - escalon) - yPato, globo.color, "white", globo.speed);
+          }
+     });
+
+
+     pato(-80, unit * 50 - yPato) // pedro   
+
 
      ctx.restore()
 }
@@ -193,6 +216,7 @@ function drawMovimiento() {
 // Función para actualizar el movimiento (hacia arriba o hacia abajo)
 function updateMovement(delta) {
      yMover += unit * distanciaMovimineto * delta;
+     yPato += unit * 0.13 * delta;
      drawMovimiento();
 
      if (yMover > alturaTotal * unit - canvas.height + (finalTorre / 2 + inicioTorre) * unit) {
@@ -243,9 +267,21 @@ function handleAnswer(moveFn) {
           }
      }, 1000);
 
-     if (puntos >= 6) {
+     if (puntos == 6) {
           clearInterval(intervalo);
+          document.getElementById('preguntas').innerHTML = "";
+
           alert('¡Has ganado!')
+          //ctx.restore()
+     
+          ctx.clearRect(0, 0, canvas.width, canvas.height + alturaTotal * unit)
+
+          const contenedor = document.getElementsByClassName("contenedor")[0];         
+               contenedor.style.backgroundColor = "white";              
+          
+          
+          parteSuperior()        
+
           return
      }
 
@@ -254,7 +290,7 @@ function handleAnswer(moveFn) {
 
 function correcto() {
      handleAnswer(move);
-     puntos++ 
+     puntos++
 
 }
 
