@@ -6,9 +6,9 @@ const grosor = 2
 
 const alturaTotal = 100
 const anchura = 8
-const finalTorre = 18
+const finalTorre = 24
 const inicioTorre = 0
-const repisas = 8
+const repisas = 7
 const anchoRepisa = 4
 
 const inicio = alturaTotal + inicioTorre

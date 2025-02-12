@@ -1,6 +1,6 @@
 //js oumar.js
 // Función para dibujar un globo con inclinación
-function dibujarGlobo(miX, miY, colorPrincipal, colorReflejo, inclinacion) {
+function dibujarGlobo(miX, miY, colorPrincipal, colorReflejo, inclinacion, lineaX, lineaY) {
      ctx.save();
 
      // Hilo del globo 
@@ -8,7 +8,7 @@ function dibujarGlobo(miX, miY, colorPrincipal, colorReflejo, inclinacion) {
      // ctx.moveTo(0, 0);
      // ctx.lineTo(0, 2.5 * unit);
      ctx.moveTo(miX, miY);
-     ctx.lineTo(unit * 18, unit * 42);
+     ctx.lineTo(lineaX, lineaY);
      ctx.strokeStyle = "black";
      ctx.stroke();
      ctx.closePath();

@@ -1,11 +1,13 @@
 let intervalo
-const intervaloMovimiento = 15
+const intervaloMovimiento = 12
 const distanciaMovimineto = 0.1
+
+
 let yMover = 0
 let yPato = 0
 count = 0
-
 puntos = 0
+
 
 const preguntas = [
      {
@@ -149,52 +151,48 @@ const preguntas = [
           incorrecto3: "Un entorno de ejecución",
      }
 ];
-
 function start() {
+
      intervalo = setInterval(move, intervaloMovimiento)
      ctx.translate(0, canvas.height - inicio * unit)
      // drawMovimiento()
 
      contador = setInterval(() => {
-          count++
-          if (count >= 1) {
-               clearInterval(intervalo)
-               clearInterval(contador)
-               resetQuestion()
-          }
+          clearInterval(intervalo)
+          clearInterval(contador)
+          resetQuestion()
 
-     }, 1000)
-
+     }, 750)
 
 }
 
 function drawMovimiento() {
 
-     
+
      ctx.clearRect(0, 0, canvas.width, canvas.height + alturaTotal * unit)
 
      ctx.save()
      ctx.translate(0, yMover)
      torreon()  // pedro
 
-     if (yMover > unit * 32) {
-          techo(0, 0) // eric
+     if (yMover > unit * 20) {
+          techo(0, 92) // eric
      }
 
-     castillo(unit *3, 800) // raúl
-     tierraToda() 
-     yPato += unit*0.12
-   
-     pato(-80, unit *50 - yPato) // pedro
-     
+     castillo(unit * 3, 800) // raúl
+     tierraToda()
+     yPato += unit * 0.13
 
+     pato(-80, unit * 50 - yPato) // pedro
+
+     dibujarGlobo(240 ,unit * 85 - yPato, "red", "white", 6, unit * 14, unit * 95-yPato) // oumar
 
      ctx.restore()
 }
 
 // Función para actualizar el movimiento (hacia arriba o hacia abajo)
 function updateMovement(delta) {
-     yMover += unit * distanciaMovimineto * delta;       
+     yMover += unit * distanciaMovimineto * delta;
      drawMovimiento();
 
      if (yMover > alturaTotal * unit - canvas.height + (finalTorre / 2 + inicioTorre) * unit) {
@@ -235,7 +233,6 @@ function handleAnswer(moveFn) {
      }
 
 
-
      // Reinicio tras un segundo
      contador = setInterval(() => {
           count++;
@@ -246,7 +243,7 @@ function handleAnswer(moveFn) {
           }
      }, 1000);
 
-     if (puntos >= 7) {
+     if (puntos >= 6) {
           clearInterval(intervalo);
           alert('¡Has ganado!')
           return
@@ -257,7 +254,7 @@ function handleAnswer(moveFn) {
 
 function correcto() {
      handleAnswer(move);
-     puntos++
+     puntos++ 
 
 }
 
