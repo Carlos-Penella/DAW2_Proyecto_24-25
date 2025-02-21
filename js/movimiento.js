@@ -5,6 +5,7 @@ const distanciaMovimineto = 0.1
 
 let yMover = 0
 let yPato = 0
+let xPato = -80
 count = 0
 puntos = 0
 
@@ -153,10 +154,10 @@ const preguntas = [
 ];
 function start() {
 
-     
+
      intervalo = setInterval(move, intervaloMovimiento)
      ctx.translate(0, canvas.height - inicio * unit)
-     // drawMovimiento()
+
 
      contador = setInterval(() => {
           clearInterval(intervalo)
@@ -166,7 +167,7 @@ function start() {
      }, 750)
 
      globos(unit * 13, unit * 5) // oumar
-    
+
 
 }
 
@@ -183,11 +184,10 @@ function drawMovimiento() {
           techo(0, 92) // eric
      }
 
-     castillo(unit * 3, 800) // raúl     
-     tierraToda()
+     castillo(unit * 3, 850) // raúl     
+     tierraToda()//carlos
 
-
-
+     const offsetGlobos = xPato + 80; 
      dibujarGlobo(unit * 14, unit * 83 - yPato, "red", "white", 0) // oumar
 
      const globosConfig = [
@@ -207,7 +207,7 @@ function drawMovimiento() {
      });
 
 
-     pato(-80, unit * 50 - yPato) // pedro   
+     pato(xPato, unit * 50 - yPato) // javier   
 
 
      ctx.restore()
@@ -256,7 +256,6 @@ function handleAnswer(moveFn) {
           intervalo = setInterval(moveFn, intervaloMovimiento);
      }
 
-
      // Reinicio tras un segundo
      contador = setInterval(() => {
           count++;
@@ -269,23 +268,30 @@ function handleAnswer(moveFn) {
 
      if (puntos == 6) {
           clearInterval(intervalo);
+          clearInterval(contador);          
+
           document.getElementById('preguntas').innerHTML = "";
-
-          alert('¡Has ganado!')
-          //ctx.restore()
-     
-          ctx.clearRect(0, 0, canvas.width, canvas.height + alturaTotal * unit)
-
-          const contenedor = document.getElementsByClassName("contenedor")[0];         
-               contenedor.style.backgroundColor = "white";              
           
-          
-          parteSuperior()        
+          // Intervalo para mover el pato hacia la izquierda
+          const intervaloIzquierda = setInterval(() => {
+               xPato -= 1;
+                // ajusta el valor para obtener el desplazamiento deseado
+               drawMovimiento();
+          }, intervaloMovimiento);
 
-          return
+          setTimeout(() => {
+               clearInterval(intervaloIzquierda);
+               
+               ctx.clearRect(0, 0, canvas.width, canvas.height + alturaTotal * unit);
+
+               const contenedor = document.getElementsByClassName("contenedor")[0];
+               contenedor.style.backgroundColor = "white";
+
+               parteSuperior();
+          }, 900);
+
+          return;
      }
-
-
 }
 
 function correcto() {

@@ -12,9 +12,8 @@ function pato(posX, posY) {
 
 }
 
-function cabeza(posX, posY) {
-     ctx.strokeStyle = 'red';
-     ctx.lineWidth = 2
+function cabeza(posX, posY) {   
+         
      ctx.beginPath();
 
      ctx.strokeRect(unit * 15 + posX, h - unit * 10 + posY, unit * 6, unit * 8);
@@ -22,7 +21,8 @@ function cabeza(posX, posY) {
 
      ctx.beginPath();
      ctx.fillStyle = patoYellow;
-     ctx.strokeStyle = "black";
+     
+     
 
      // El centro del círculo estará en las coordenadas x=700, y=100
      // Su radio será de 50
