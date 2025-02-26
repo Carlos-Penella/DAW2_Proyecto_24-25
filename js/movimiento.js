@@ -173,7 +173,6 @@ function start() {
 
 function drawMovimiento() {
 
-
      ctx.clearRect(0, 0, canvas.width, canvas.height + alturaTotal * unit)
 
      ctx.save()
@@ -185,30 +184,30 @@ function drawMovimiento() {
      }
 
      castillo(unit * 3, 850) // raúl     
-     tierraToda()//carlos
+     tierraToda() // carlos
 
-     const offsetGlobos = xPato + 80; 
-     dibujarGlobo(unit * 14, unit * 83 - yPato, "red", "white", 0) // oumar
+     // Solo dibuja los globos si puntos no es 6
+     if (puntos != 7) {
+          dibujarGlobo(unit * 14, unit * 83 - yPato, "red", "white", 0) // oumar
 
-     const globosConfig = [
-          { x: 12.4, y: 84, color: "blue", speed: -0.1 },
-          { x: 15.5, y: 86, color: "pink", speed: 0.1 },
-          { x: 12, y: 90, color: "limegreen", speed: -0.2 },
-          { x: 14.3, y: 91, color: "purple", speed: 0.009 },
-          { x: 15.6, y: 94, color: "yellow", speed: 0.25 },
-          { x: 13.3, y: 97, color: "orange", speed: -0.1 }
-     ];
+          const globosConfig = [
+               { x: 12.4, y: 84, color: "blue", speed: -0.1 },
+               { x: 15.5, y: 86, color: "pink", speed: 0.1 },
+               { x: 12, y: 90, color: "limegreen", speed: -0.2 },
+               { x: 14.3, y: 91, color: "purple", speed: 0.009 },
+               { x: 15.6, y: 94, color: "yellow", speed: 0.25 },
+               { x: 13.3, y: 97, color: "orange", speed: -0.1 }
+          ];
 
-     globosConfig.forEach((globo, index) => {
-          if (puntos >= index + 1) {
-               const escalon = index * 2;
-               dibujarGlobo(unit * globo.x, unit * (globo.y - escalon) - yPato, globo.color, "white", globo.speed);
-          }
-     });
-
+          globosConfig.forEach((globo, index) => {
+               if (puntos >= index + 1) {
+                    const escalon = index * 2;
+                    dibujarGlobo(unit * globo.x, unit * (globo.y - escalon) - yPato, globo.color, "white", globo.speed);
+               }
+          });
+     }
 
      pato(xPato, unit * 50 - yPato) // javier   
-
 
      ctx.restore()
 }
@@ -234,14 +233,26 @@ function moveAbajo() {
 
 // Función para restaurar la pregunta en el contenedor
 function resetQuestion() {
-     let contenedor = document.getElementById('preguntas');
+    let contenedor = document.getElementById('preguntas');
+    const preguntaElegida = preguntas[Math.floor(Math.random() * preguntas.length)];
+    
+    // Definir las respuestas
+    let respuestas = [
+        { texto: preguntaElegida.correcto, accion: "correcto()" },
+        { texto: preguntaElegida.incorrecto, accion: "incorrecto()" },
+        { texto: preguntaElegida.incorrecto2, accion: "incorrecto()" },
+        { texto: preguntaElegida.incorrecto3, accion: "incorrecto()" }
+    ];
 
-     const preguntaElegida = preguntas[Math.floor(Math.random() * preguntas.length)];
-     contenedor.innerHTML = `<h1>${preguntaElegida.pregunta}</h1>
-     <button onclick="correcto()">${preguntaElegida.correcto}</button><br> <br>
-     <button onclick="incorrecto()">${preguntaElegida.incorrecto}</button><br> <br>
-     <button onclick="incorrecto()">${preguntaElegida.incorrecto2}</button><br> <br>
-     <button onclick="incorrecto()">${preguntaElegida.incorrecto3}</button><br> <br>`;
+    // Mezclar las respuestas aleatoriamente
+   //respuestas.sort(() => Math.random() - 0.5);
+
+    // Construir el HTML
+    let html = `<h1>${preguntaElegida.pregunta}</h1>`;
+    respuestas.forEach(respuesta => {
+        html += `<button onclick="${respuesta.accion}">${respuesta.texto}</button><br> <br>`;
+    });
+    contenedor.innerHTML = html;
 }
 
 // Función para manejar la respuesta y reiniciar el movimiento
@@ -288,6 +299,8 @@ function handleAnswer(moveFn) {
                contenedor.style.backgroundColor = "white";
 
                parteSuperior();
+
+               pato(unit *-1, unit*37);
           }, 900);
 
           return;
